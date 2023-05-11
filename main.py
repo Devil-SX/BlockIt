@@ -1,14 +1,17 @@
 import re
+import logging
+import pprint
 from graphviz import Digraph
 from tkinter import *
 from tkinter import filedialog
 
 
 # 正则表达式模式
-module_pattern = r'module\s+([\w\d_]+)\s+\(([\w\d_,\s]*)\)\s*;'
-input_pattern = r'input\s+([\w\d_,\s]+);'
-output_pattern = r'output\s+([\w\d_,\s]+);'
-inout_pattern = r'inout\s+([\w\d_,\s]+);'
+module_pattern = r'module\s+([\w]+)\s*\(([\w,\s\[\]:\/]*)\)\s*;'
+# input_pattern = r'input\s+([\w\d_,\s]+);'
+input_pattern = r'input\s+([\w\[:\]]+)\s+'
+output_pattern = r'output\s+([\w\[:\]]+)\s+'
+inout_pattern = r'inout\s+([\w\[:\]]+)\s+'
 
 # 读取Verilog文件并解析
 def read_verilog_file(file_path):
@@ -26,6 +29,8 @@ def read_verilog_file(file_path):
             inout_matches = re.findall(inout_pattern, signal_str)
             signal_dict = {'inputs': input_matches, 'outputs': output_matches, 'inouts': inout_matches}
             module_dict[module_name] = signal_dict
+
+        logging.info(pprint.pformat(module_dict,indent=4))
 
         # 解析信号
         signal_matches = re.findall(r'([\w\d_,\s]*)\s*;', content)
@@ -96,7 +101,8 @@ def show_graph_window(dot):
     top.geometry("800x600")
 
     # 生成图像
-    graph = dot.render(format='pdf', engine='dot')
+    graph = dot.render(format='png', engine='dot')
+    logging.debug(graph)
     pdf_image = PhotoImage(file=graph)
 
     # 显示图像
@@ -107,6 +113,19 @@ def show_graph_window(dot):
 
 # 主函数
 def main():
+    # 设置日志
+    logging.basicConfig(filename='logfile.log', level=logging.DEBUG, 
+                    format='%(asctime)s %(levelname)s:%(message)s', 
+                    datefmt='%Y-%m-%d %H:%M:%S')
+
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    console.setFormatter(logging.Formatter('%(levelname)-8s %(message)s'))
+    logging.getLogger('').addHandler(console)
+
+    logging.debug('Program Start')
+
+
     root = Tk()
     root.title('Verilog Tools')
     root.geometry("400x300")
@@ -130,7 +149,10 @@ def main():
     # 显示连接图按钮
     def show_graph():
         file_path = file_entry.get()
-        top_module_name = 'top'  # 这里可以改成自己想要的顶层模块名称
+        logging.debug(f"file_path={file_path}")
+        top_module_name = re.search('(\w+).v',file_path).group(1)
+        logging.debug(f"top_module_name={top_module_name}")
+
         module_dict, signal_dict = read_verilog_file(file_path)
         dot = generate_connection_graph(top_module_name, module_dict)
         show_graph_window(dot)
