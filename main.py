@@ -8,10 +8,13 @@ from tkinter import filedialog
 
 # 正则表达式模式
 module_pattern = r'module\s+([\w]+)\s*\(([\w,\s\[\]:\/]*)\)\s*;'
-# input_pattern = r'input\s+([\w\d_,\s]+);'
 input_pattern = r'input\s+([\w\[:\]]+)\s+'
 output_pattern = r'output\s+([\w\[:\]]+)\s+'
 inout_pattern = r'inout\s+([\w\[:\]]+)\s+'
+
+instance_pattern = r'(\w+)\s+(\w+)\(([\s\S]*\));'
+signal_pattern = r'\.(\w+)\s+\(([\w\[\]]+)\s+\)'
+
 
 # 读取Verilog文件并解析
 def read_verilog_file(file_path):
