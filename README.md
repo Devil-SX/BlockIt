@@ -4,7 +4,7 @@
 </h1>
 
 <p align="center">
-  提供您的Verilog设计工作效率！
+  提高您的Verilog设计工作效率！
 </p>
 
 <p align="center">
