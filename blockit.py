@@ -1,34 +1,43 @@
 #!/usr/bin/python3
 import argparse
 from pathlib import Path
-import blockit.hdl_re as btre
-import blockit.doc_gen as btdoc
+import blockit.doc_gen as bidoc
+import blockit.tb_gen as bitb
+
+
+def doc(args):
+    output_dir = Path(args.output)
+    if not output_dir.is_dir():
+        Path(args.output).mkdir(parents=True)
+
+    for file in args.file_path:
+        bidoc.gen_markdown_file(file, output_dir)
+
+
+def tb(args):
+    for file in args.file_path:
+        bitb.print_instance(file)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Convert module to markdown table")
-    parser.add_argument(
+    parser = argparse.ArgumentParser(description="Blockit Verilog Auto Toolbox")
+    subparsers = parser.add_subparsers()
+    # Auto Doc
+    parser_doc = subparsers.add_parser("doc", help="Generate Markdown document")
+    parser_doc.add_argument(
         "file_path", type=str, nargs="+", help="Verilog module file path"
     )
-    parser.add_argument(
+    parser_doc.add_argument(
         "-o", "--output", type=str, default="doc", help="Output file dir"
     )
+    parser_doc.set_defaults(func=doc)
+
+    # Auto Testbench
+    parser_tb = subparsers.add_parser("tb", help="Generate Testbench")
+    parser_tb.add_argument(
+        "file_path", type=str, nargs="+", help="Verilog module file path"
+    )
+    parser_tb.set_defaults(func=tb)
+
     args = parser.parse_args()
-
-    if args.file_path:
-        # Check Dir
-        output_dir = Path(args.output)
-        if not output_dir.is_dir():
-            Path(args.output).mkdir(parents=True)
-
-        for file in args.file_path:
-            with open(file, "r") as f:
-                content = f.read()
-            module_name = btre.get_module_name(content)
-            parameter_data = btre.get_paras(content)
-            port_data = btre.get_ports(content)
-            table_str = btdoc.gen_markdown_str(port_data, module_name, parameter_data)
-            out_path = output_dir / f"{module_name}.md"
-            with open(out_path, "w") as f:
-                f.write(table_str)
-                print(f"Ports of {module_name}\t-> {out_path} Finished!")
+    args.func(args)

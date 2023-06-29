@@ -16,9 +16,9 @@
 
 在阅读HDL代码时，总想着要是可以 **像Vivado的Block Design查看模块间的连线** 就好了呀！
 
-最初的构想只是想写一个类似Vivado的Block Design可视化工具，后来发展为辅助Verilog编程的自动化脚本工具箱。
+最初的构想只是想写一个类似Vivado的Block Design可视化工具，后来发展为辅助Verilog编程的自动化脚本工具箱
 
-**目前工具尚不支持单文件内定义多模块的写法。**
+**目前工具尚不支持单文件内定义多模块的写法**
 
 门级网表的可视化可以参考[yosys](https://github.com/YosysHQ/yosys)
 
@@ -34,7 +34,7 @@
 
 先切换到仓库目录
 
-安装环境
+安装环境（目前还没有依赖环境）
 
 ```
 pip install -r requirements.txt
@@ -54,10 +54,10 @@ python blockit.py --help
 blockit.py --help
 ```
 
-# Auto Doc 自动生成说明文档
+# Auto Doc 自动生成模块接口文档
 
 ```
-blockit.py [-o OUTPUT] file_path [file_path ...]
+blockit.py doc [-h] [-o OUTPUT] file_path [file_path ...]
 ```
 
 该命令将自动识别并生成指定文件的说明文档，包含模块名称、模块参数、模块参数
@@ -70,12 +70,29 @@ blockit.py [-o OUTPUT] file_path [file_path ...]
 
 todo
 
-# Visualize Connetions 可视化互联结构
+# Visualize Connections 可视化互联结构
 
 todo
 
+# Auto Testbench 自动编写测试文件
 
-## Reference 
+```
+blockit.py tb [-h] file_path [file_path ...]
+```
+
+该命令将自动识别制定文件中的模块定义，并将模块实例化代码输出至控制台，供复制粘贴在testbench文件中
+
+# Auto Simulation 自动编写测试脚本
+
+todo
+
+# 自动化层次
+
+- 识别模块、端口、参数
+- 识别模块之间耦合关系
+- 识别模块内部代码含义
+
+# Reference 
 
 [better-layout-of-nodes-for-block-diagrams-in-dot](https://stackoverflow.com/questions/8042801/better-layout-of-nodes-for-block-diagrams-in-dot)
 
