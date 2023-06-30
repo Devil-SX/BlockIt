@@ -15,8 +15,12 @@ def doc(args):
 
 
 def tb(args):
-    for file in args.file_path:
-        bitb.print_instance(file)
+    if args.output is None:
+        for file in args.file_path:
+            bitb.print_instance(file)
+    else:
+        for file in args.file_path:
+            bitb.gen_instance_file(file, args.output)
 
 
 if __name__ == "__main__":
@@ -37,6 +41,7 @@ if __name__ == "__main__":
     parser_tb.add_argument(
         "file_path", type=str, nargs="+", help="Verilog module file path"
     )
+    parser_tb.add_argument("-o", "--output", type=str, help="Output file path")
     parser_tb.set_defaults(func=tb)
 
     args = parser.parse_args()

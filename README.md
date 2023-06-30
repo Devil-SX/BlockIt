@@ -12,7 +12,6 @@
     <img alt="HDL" src="https://img.shields.io/badge/Verilog-155489?style=for-the-badge"></a>
 </p>
 
-# 来源
 
 在阅读HDL代码时，总想着要是可以 **像Vivado的Block Design查看模块间的连线** 就好了呀！
 
@@ -24,7 +23,8 @@
 
 # Features
 
-- 自动生成模块文档
+- （半）自动生成模块文档
+- （半）自动生成Testbench
 - 查看模块层次结构 (doing)
 - 查看模块互联结构 (doing)
 
@@ -54,41 +54,17 @@ python blockit.py --help
 blockit.py --help
 ```
 
-# Auto Doc 自动生成模块接口文档
+# Document
 
-```
-blockit.py doc [-h] [-o OUTPUT] file_path [file_path ...]
-```
+- [自动生成文档](./doc/auto_doc.md)
+- [自动化编写测试用例](./doc/auto_testbench.md)
+- (todo)[自动生成仿真脚本](./doc/auto_simulation.md)
+- (todo)[可视化层次关系](./doc/visualize_hirearchy.md)
+- (todo)[可视化互联关系](./doc/visualize_connections.md)
 
-该命令将自动识别并生成指定文件的说明文档，包含模块名称、模块参数、模块参数
+# Target
 
-`-o` 参数不指定则默认生成在 `/doc` 目录下
-
-比如`bockit.py *.v`自动生成当前目录下所有.v文件的文档
-
-# Visualize Hierarchy 可视化模块层次
-
-todo
-
-# Visualize Connections 可视化互联结构
-
-todo
-
-# Auto Testbench 自动编写测试文件
-
-```
-blockit.py tb [-h] file_path [file_path ...]
-```
-
-该命令将自动识别制定文件中的模块定义，并将模块实例化代码输出至控制台，供复制粘贴在testbench文件中
-
-# Auto Simulation 自动编写测试脚本
-
-todo
-
-# 自动化层次
-
-- 识别模块、端口、参数
+- 识别模块、端口、参数 <- Current State
 - 识别模块之间耦合关系
 - 识别模块内部代码含义
 
