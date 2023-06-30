@@ -41,12 +41,16 @@ def gen_instance(input_paths: list[Path | str], output_path: Path | str = None) 
         output += instance + "\n"
 
     if output_path is None:
+        # 如果没提供输出路径打印在终端
         print(output, end=None)
     else:
-        # 如果没提供输出路径打印在终端
-        with open(output_path, "w") as f:
+        mode = "w"
+        if Path(output_path).exists():
+            # 存在则追加写入
+            mode = "a"
+        with open(output_path, mode) as f:
             f.write(output)
-        print(f"Write {output_path} successfully!")
+        print(f"Write instances {output_path} successfully!")
 
 
 def gen_signals_str(port_data: list[tuple[str, str, str]], module_name: str) -> str:
@@ -73,9 +77,13 @@ def gen_signals(input_paths: list[Path | str], output_path: Path | str = None) -
         output += signals + "\n"
 
     if output_path is None:
+        # 如果没提供输出路径打印在终端
         print(output, end=None)
     else:
-        # 如果没提供输出路径打印在终端
-        with open(output_path, "w") as f:
+        mode = "w"
+        if Path(output_path).exists():
+            # 存在则追加写入
+            mode = "a"
+        with open(output_path, mode) as f:
             f.write(output)
-        print(f"Write {output_path} successfully!")
+        print(f"Write signals {output_path} successfully!")
