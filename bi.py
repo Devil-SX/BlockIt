@@ -15,12 +15,13 @@ def doc(args):
 
 
 def tb(args):
-    if args.output is None:
-        for file in args.file_path:
-            bitb.print_instance(file)
+    if args.mode is not None:
+        if "s" in args.mode:
+            bitb.gen_signals(args.file_path, args.output)
+        if "i" in args.mode:
+            bitb.gen_instance(args.file_path, args.output)
     else:
-        for file in args.file_path:
-            bitb.gen_instance_file(file, args.output)
+        print('You have to chose a mode!\nType "bi.py tb -h" for help.')
 
 
 if __name__ == "__main__":
@@ -40,6 +41,13 @@ if __name__ == "__main__":
     parser_tb = subparsers.add_parser("tb", help="Generate Testbench")
     parser_tb.add_argument(
         "file_path", type=str, nargs="+", help="Verilog module file path"
+    )
+    parser_tb.add_argument(
+        "-m",
+        "--mode",
+        choices=["s", "i"],
+        nargs="+",
+        help='"s" for generate Signals, "i" for generate Instance',
     )
     parser_tb.add_argument("-o", "--output", type=str, help="Output file path")
     parser_tb.set_defaults(func=tb)

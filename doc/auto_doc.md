@@ -1,7 +1,7 @@
 # Auto Doc 自动生成模块接口文档
 
 ```
-blockit.py doc [-h] [-o OUTPUT] file_path [file_path ...]
+bi.py doc [-h] [-o OUTPUT] file_path [file_path ...]
 ```
 
 该命令将自动识别并生成指定文件的说明文档，包含模块名称、模块参数、模块参数

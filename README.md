@@ -43,18 +43,18 @@ pip install -r requirements.txt
 查看帮助
 
 ```
-python blockit.py --help
+python bi.py --help
 ```
 
-或者您可以将项目目录添加至环境变量，并修改`blockit.py`开头的`#!/usr/bin/python3`制定使用的python解释器，之后便可在任意位置调用该脚本
+或者您可以将项目目录添加至环境变量，并修改`bi.py`开头的`#!/usr/bin/python3`制定使用的python解释器，之后便可在任意位置调用该脚本
 
 即
 
 ```
-blockit.py --help
+bi.py --help
 ```
 
-# Document
+# Documents
 
 - [自动生成文档](./doc/auto_doc.md)
 - [自动化编写测试用例](./doc/auto_testbench.md)
@@ -62,7 +62,7 @@ blockit.py --help
 - (todo)[可视化层次关系](./doc/visualize_hirearchy.md)
 - (todo)[可视化互联关系](./doc/visualize_connections.md)
 
-# Target
+# Targets
 
 - 识别模块、端口、参数 <- Current State
 - 识别模块之间耦合关系
