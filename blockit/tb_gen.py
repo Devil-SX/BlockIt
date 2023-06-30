@@ -58,7 +58,7 @@ def gen_signals_str(port_data: list[tuple[str, str, str]], module_name: str) -> 
 
     for i, port in enumerate(port_data):
         if "output" in port[0]:
-            signals += port[0].replace("output", "wire")
+            signals += port[0].replace("output", "wire").replace("reg", "")
             signals += " " + port[1] + ";\n"
 
     signals += "\n"
