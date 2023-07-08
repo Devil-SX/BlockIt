@@ -12,6 +12,8 @@
     <img alt="HDL" src="https://img.shields.io/badge/Verilog-155489?style=for-the-badge"></a>
 </p>
 
+---
+
 <p align="center">
 <b>⚠️ 该仓库已停止开发!</b></br>
 项目定位出了点问题,因此停止开发</br>
