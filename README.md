@@ -15,13 +15,11 @@
 ---
 
 <p align="center">
-<b>⚠️ 该仓库已停止开发!</b></br>
-项目定位出了点问题,因此停止开发</br>
+<b>⚠️ 该仓库重新调整定位中!</b>
 </p>
 
 - 该仓库使用 正则表达式 解析Verilog语法(也就是做[Parsing](https://en.wikipedia.org/wiki/Parsing) ), 使用如[Bison](https://www.gnu.org/software/bison/)的语法检查器生成器更加自然.Verilog语法检查器已有不少开源项目,项目放弃维护Verilog Parsing模块.
-- Verilog层次可视化化已有[Verilog-DOT](https://github.com/ben-marshall/verilog-dot)实现
-
+- Verilog层次可视化化已有[Verilog-DOT](https://github.com/ben-marshall/verilog-dot),[Pyverilog](https://github.com/PyHDI/Pyverilog)等实现
 
 ---
 
