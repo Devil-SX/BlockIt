@@ -26,7 +26,7 @@
 
 在阅读HDL代码时，总想着要是可以 **像Vivado的Block Design查看模块间的连线** 就好了呀！
 
-最初的构想只是想写一个类似Vivado的Block Design可视化工具，后来发展为辅助Verilog编程的自动化脚本工具箱
+最初的构想只是想写一个类似Vivado的Block Design可视化工具，后来发展为辅助Verilog编程的自动化脚本工具箱,关于项目更多的设想可以看[这里](./docs/design.md)
 
 **目前工具尚不支持单文件内定义多模块的写法**
 
@@ -72,15 +72,3 @@ bi.py --help
 - (todo)[自动生成仿真脚本](./doc/auto_simulation.md)
 - (todo)[可视化层次关系](./doc/visualize_hirearchy.md)
 - (todo)[可视化互联关系](./doc/visualize_connections.md)
-
-# Targets
-
-- 识别模块、端口、参数 <- Current State
-- 识别模块之间耦合关系
-- 识别模块内部代码含义
-
-# Reference 
-
-[better-layout-of-nodes-for-block-diagrams-in-dot](https://stackoverflow.com/questions/8042801/better-layout-of-nodes-for-block-diagrams-in-dot)
-
-[block-diagram-layout-with-dot-graphviz](https://stackoverflow.com/questions/7922960/block-diagram-layout-with-dot-graphviz)
